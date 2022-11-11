@@ -1,5 +1,7 @@
 #### Install Apache Kafka on Linux Machine:
+___
 #### Prerequisites:
+
 * Linux operating system
 * Java 8 JDK installed
 * Scala 2.11.x installed
@@ -9,6 +11,7 @@
 3. sudo mv kafka_2.13-3.1.1.tgz /usr/local/kafka
 
 #### Apache Kafka Topics
+___
 * Central Kafka abstraction
 * Named feed or category of messages
   * Producers produce to a topic
@@ -62,3 +65,56 @@ ___
   * Single partition for global ordering
   * Consumer-handling for ordering
 * The more partitions the longer the leader fail-over time
+
+### Replication Factor
+___
+* Reliable work distribution
+  * Redundancy of messages
+  * Cluster resiliency
+  * Fault-tolerance
+* Guarantees
+  * N-1 broker failure tolerance
+  * 2 or 3 minimum
+* Configured on a per-topic basis
+* Viewing Topic State command: `bin/kafka-topics.sh --describe --topic my_topic --zookeeper localhost:2181`
+
+#### Example: Fault-tolerance and Resiliency in Apache Kafka
+*  Multi-broker Kafka setup,Single Partition Topic,Replication Factor of 3
+1. Start Zookeeper 
+2. Start the 3 Brokers By:
+ ```shell 
+  1. Terminal 1: bin/kafka-server-start.sh config/server-0.properties
+  2. Terminal 2: bin/kafka-server-start.sh config/server-1.properties
+  3. Terminal 3: bin/kafka-server-start.sh config/server-2.properties
+ ```
+3. Create topic with relocation factor of 3 and 1 partition:
+```shell
+  bin/kafka-topics.sh \
+   --create --topic replicated_topic \
+   --zookeeper localhost:2181 \
+   --replication-factor 3 \
+   --partitions 1
+```
+4. Get Details about created topic (3):
+```shell
+bin/kafka-topics.sh \
+--describe --topic replicated_topic \
+--zookeeper localhost:2181
+```
+5. Run the Producer:
+```shell
+bin/kafka-console-producer.sh \
+--broker-list localhost:9092 \
+--topic relicated_topic
+Type -> Or Hasson was here 1 -> Enter
+Type -> Or Hasson was here 2 -> Enter
+Type -> Or Hasson was here 3 -> Enter
+```
+6. Run the Consumer: 
+```shell
+bin/kafka-console-consumer.sh \
+--zookeeper localhost:2181 \
+--topic replicatred_topic \
+--from-beginning
+```
+
