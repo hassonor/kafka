@@ -118,3 +118,33 @@ bin/kafka-console-consumer.sh \
 --from-beginning
 ```
 
+### Kafka Producer Demo:
+___
+#### Kafka Producer: Required Properties
+* **bootstrap.servers**:
+  * Cluster membership: partition leaders, etc.
+* **key and value serializers**:
+  * Classes used for message serialization and deserialization
+
+#### ProducerRecord: Required Properties
+* **topic**:
+  * Topic to which the ProducerRecord will be sent
+* **value**:
+  * The message content (matching the serializer type for value)
+* KafkaProducer instanced can **ONLY** send producerRecords that match the **key**
+and **value** serializers types it is configured with.
+
+#### ProducerRecord: Optional Properties:
+* **partition** 
+  * specific partition within the topic to send ProducerRecord
+* **timestamp**
+  * The Unix timestamp applied to the record
+* **key**
+  * a value to be used as the basis of determining the partitioning strategy to be employed by the Kafka Producer.
+* **BEST PRACTICE**: Define a Key
+  * **Two useful purposes**:
+    * Additional information in the message
+    * Can determine what partitions the message will be written to
+  * **Downside:**
+    * Additional overhead
+    * Depends on the serializer type used
