@@ -28,3 +28,37 @@
   * Default is **168** hours or **seven** days
 * Retention period is defined on a per-topic basis
 * Physical storage resources can constrain message retention
+
+
+#### Transaction or Commit Logs
+* Source of truth
+* Physically stored and maintained
+* Higher-order data structures derive from the log
+  * Tables, indexes, views, etc.
+* Point of recovery
+* **Apache Kafka is public-subscribe messaging rethought as distributed commit log.**
+
+### Kafka partitions
+___
+* Each topic has one or more partitions
+* A partition is the basis for which Kafka can:
+  * Scale 
+  * Become fault-tolerant
+  * Achieve higher levels of throughput
+* Each partition is maintained on at least one of more Brokers
+* Creating a Topic: Single Partition:
+```shell
+~$ bin/kafka-topics.sh --create --topic my_topic \
+> --zookeeper localhost:2181 \ 
+> --partitions 1 \
+> --replication-factor 1
+```
+* **In general**, the scalability of Apache Kafka is determined by the number of partitions being managed by multiple brokers nodes.
+
+#### Partitioning Trade-offs
+* The more partitions the greater the Zookeeper overhead
+  * With large partition numbers ensure proper ZK capacity
+* Message ordering can become complex
+  * Single partition for global ordering
+  * Consumer-handling for ordering
+* The more partitions the longer the leader fail-over time
