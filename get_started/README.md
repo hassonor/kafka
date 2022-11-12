@@ -118,7 +118,7 @@ bin/kafka-console-consumer.sh \
 --from-beginning
 ```
 
-### Kafka Producer Demo:
+### Kafka Producer:
 ___
 #### Kafka Producer: Required Properties
 * **bootstrap.servers**:
@@ -178,3 +178,57 @@ and **value** serializers types it is configured with.
 * Delivery semantics
   * At-most-once, at least-once, only-once
 
+### Kafka Consumer
+___
+#### Kafka Consumer: Required Properties
+* **bootstrap.servers**
+  * Cluster membership: partition leaders, etc.
+* **key and value deserializers**
+  * Classes used for message deserialization
+* Consumer Docs: https://kafka.apache.org/documentation.html#consumerconfigs 
+* **subscribe()**:
+  * For topics (dynamic/automatic)
+  * One topic, one-to-many partitions
+  * Many topics, many more partitions
+* **assign()**:
+  * For partitions 
+  * One or more partitions, regardless of topic
+  * Manual, self-administering mode
+
+#### Offset Behavior
+* Read != Committed
+* Offset commit behavior is configurable
+  * enable.auto.commit = true (default)
+  * auto.commit-.interval.ms = 5000 (default)
+  * auto.offset.reset = "latest" (default)
+    * "earliest"
+    * "none"
+
+#### Consumer Configuration
+* **Consumer performance and efficiency**
+  * fetch.min.bytes
+  * max.fetch.wait.ms
+  * max.partition.fetch.bytes
+  * max.poll.records
+
+### Kafka Ecosystem and Its Future
+___
+#### Primary Use Cases for Apache Kafka
+* Connecting disparate source of data
+* Large-scale data movement pipelines
+* "Big Data" Integration
+
+#### Apache Kafka Connect
+* Common framework for integration
+  * Standardization of common approaches
+  * Producers and Consumers
+* Platform Connectors
+  * Oracle, HP, etc.
+  * 60+ and growing
+* Connector Hub
+
+#### Kafka Streams
+* Leverage existing Kafka machinery
+* Single infrastructure solution
+  * At least for streaming-based processing
+* Embeddable within existing applications
