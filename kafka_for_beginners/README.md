@@ -17,4 +17,6 @@ ___
 * Offset only have a meaning for a specific partition.
   * E.g. offset 4 in partition 0 doesn't represent the same data as offset 4 in partition 1.
 * Order is guaranteed only withing a partition (not across  partitions)
-
+* Data is kept only for a limited time (_default_ is 1 week)
+* Once the data is written to a partition, **it can't be changed** (_immutability_)
+* Data is assigned randomly to a partition unless a key is **provided** 
