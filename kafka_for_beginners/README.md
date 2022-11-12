@@ -1,6 +1,7 @@
 ### Kafka Theory
 ___
 #### Topics, partitions and offsets
+___
 * Topics: a particular of data
   * Similar to a table in a database (without all the constraints)
   * You can have as many topics as you want
@@ -22,8 +23,21 @@ ___
 * Data is assigned randomly to a partition unless a key is **provided** 
 
 #### Brokers
+___
 * A Kafka cluster is composed of multiple brokers (servers)
 * Each broker is identified with its ID (Integer)
 * Each broker contains certain topic partitions
 * After connecting to any broker (called a bootstrap broker), you will be connected to the _entire cluster_
 * A **good** number to get started is 3 brokers, but some big clusters have **over** 100 brokers
+
+#### Topic Replication 
+____
+#### Topic replication factor
+* Topics should have a replication factor > 1 (usually **between** 2 **and** 3)
+* This way if a broker is down, another broker can serve the data
+
+#### Concept of Leader for a Partition
+* At any time only **ONE** broker can be a leader for a given partition
+* Only that leader can receive and serve data for a partition
+* The other brokers will synchronize the data
+* Therefore, each partition has one leader and multiple ISR (in-sync replica).
