@@ -58,3 +58,20 @@ ___
 * If key=null, data is sent round-robin (broker 1 then 2 then 3).
 * If key is send, then all messaged for that key will always go to the same partition
 * A key is basically sent if you need message ordering for a specific field (ex: `truck_id`)
+
+#### Consumer and consumer group
+___
+#### Consumers
+* Consumers read data from a topic (identified by name)
+* Consumers know which broker to read from
+* In case of broker failures, consumers know hot to recover
+* Data is read in order **within each partition**
+
+#### Consumer Groups
+* Consumers read data in consumer groups
+* Each consumer withing a group read from exclusive partitions
+* If you have more consumers that partitions, some consumers will be inactive
+* **_Note:_** Consumers will automatically use a GroupCoordinator and a ConsumerCoordinator to assign a consumers to a partition 
+
+#### Consumer Groups: What if yoo many consumers?
+* If you have more consumers that partitions, some consumers will be inactive
