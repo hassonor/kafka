@@ -36,3 +36,20 @@ ____
 * Only that leader can receive and serve data for a partition
 * The other brokers will synchronize the data
 * Therefore, each partition has one leader and multiple ISR (in-sync replica).
+
+#### Producers and message keys
+___
+#### Producers
+* Producers write data to topics (which is made of partitions)
+* Producers automatically know to which broker and partition to write to
+* In case of Broker failures, Producers will automatically recover
+* Producers can choose to receive acknowledgment of data writes:
+* **acks=0**: Producer won't wait for acknowledgment (possible data loss)
+* **acks=1** _(default)_: Producer will wait for leader acknowledgment (limited data loss)
+* **acks=all: Leader + replicas acknowledgment (no data loss)
+
+#### Producers: Message keys
+* Producers can choose to send a **key** with the message (string, number, etc...)
+* If key=null, data is sent round-robin (broker 1 then 2 then 3).
+* If key is send, then all messaged for that key will always go to the same partition
+* A key is basically sent if you need message ordering for a specific field (ex: `truck_id`)
