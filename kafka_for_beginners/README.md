@@ -75,3 +75,26 @@ ___
 
 #### Consumer Groups: What if yoo many consumers?
 * If you have more consumers that partitions, some consumers will be inactive
+
+#### Consumer Offsets and delivery semantics
+___
+#### Consumer Offsets
+* **Kafka** stores the offsets at which a consumer group has been reading
+* The offsets committed live in a **Kafka** _topic_ named ___consumer_offset_
+* When a consumer in a group has processed data received from Kafka, it should be committing the offsets
+* If a consumer dies, it will be able to read back from where it left off thanks to the committed consumer offsets!
+
+#### Delivery semantics for consumers:
+* Consumers choose when to commit offsets.
+* There are 3 delivery semantics:
+  * **At most once**:
+    * offsets are committed as soon as the message is received
+    * If the processing goes wrong, the message will be lost (it won't be read again).
+  * **At least once (usually preferred)**:
+    * offsets are committed after the message is processed.
+    * If the processing goes wrong, the message will be read again.
+    * This can result in duplicate processing of messages. Make sure your processing is **idempotent** (i.e. processing again
+    the messages won't impact your systems)
+  * **Exactly once**:
+    * Can be achieved for Kafka => Kafka workflows using Kafka Streams API
+    * For Kafka => External System workflows, use an **idempotent** consumer.
