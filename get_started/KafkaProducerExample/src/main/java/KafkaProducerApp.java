@@ -10,8 +10,19 @@ public class KafkaProducerApp {
         props.put("key.serializer", "org.apache.kafka.common.serialization.StringSerializer");
         props.put("value.serializer", "org.apache.kafka.common.serialization.StringSerializer");
 
-        KafkaProducer myProducer = new KafkaProducer(props);
-        ProducerRecord myRecord = new ProducerRecord("my_topic","Hello-001","My name is Or Hasson Message 1");
-        myProducer.send(myRecord); // Best practice -> try...catch
+        KafkaProducer<String, String> myProducer = new KafkaProducer<>(props);
+
+        try{
+            for (int i = 0; i  < 100; i++){
+                myProducer.send(new ProducerRecord<String, String>("my-topic",Integer.toString(i), "Or Hasson Message: " + Integer.toString(i)));
+            }
+        }
+        catch( Exception e){
+            e.printStackTrace();
+        }
+        finally{
+            myProducer.close();
+        }
+
     }
 }

@@ -148,3 +148,33 @@ and **value** serializers types it is configured with.
   * **Downside:**
     * Additional overhead
     * Depends on the serializer type used
+
+#### Micro-batching in Apache Kafka
+* At scale, efficiency is everything.
+* Small, fast batches of messages:
+  * Sending (Producer)
+  * Writing (Broker)
+  * Reading (Consumer)
+* Modern operating system functions: 
+  * Pagecache
+  * Linux sendfile() system call (kernel)
+* Amortization of the constant cost
+
+#### Delivery Guarantees
+* Broker acknowledgement("acks")
+  * 0: fire and forget
+  * 1: leader acknowledged
+  * 2: replication quorum acknowledged
+* Broker responds with error
+  * "retries"
+  * "retry.backoff.ms"
+
+#### Ordering Guarantees
+* Message order by partition
+  * No global order across partitions
+* Can get complicated with errors
+  * retries, retry.backoff.ms
+  * max.in.flight.request.per.connection
+* Delivery semantics
+  * At-most-once, at least-once, only-once
+

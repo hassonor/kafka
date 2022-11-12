@@ -148,3 +148,14 @@ and **value** serializers types it is configured with.
   * **Downside:**
     * Additional overhead
     * Depends on the serializer type used
+
+#### Micro-batching in Apache Kafka
+* At scale, efficiency is everything.
+* Small, fast batches of messages:
+  * Sending (Producer)
+  * Writing (Broker)
+  * Reading (Consumer)
+* Modern operating system functions: 
+  * Pagecache
+  * Linux sendfile() system call (kernel)
+* Amortization of the constant cost
