@@ -126,3 +126,6 @@ ___
   * Allows for another broker to be taken down unexpectedly
 * As long as the number of partitions remains constant for a topic (no new partitions), the same
 key will always go to the same partition
+
+
+![Twitter](https://github.com/hassonor/kafka/blob/master/screenshots/KafkaTheorySum.png)
