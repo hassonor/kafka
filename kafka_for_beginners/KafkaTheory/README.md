@@ -128,4 +128,4 @@ ___
 key will always go to the same partition
 
 
-![Twitter](https://github.com/hassonor/kafka/blob/master/screenshots/KafkaTheorySum.png)
+![Twitter](https://github.com/hassonor/kafka/blob/master/kafka_for_beginners/KafkaTheory/screenshots/KafkaTheorySum.png)
