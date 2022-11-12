@@ -20,3 +20,10 @@ ___
 * Data is kept only for a limited time (_default_ is 1 week)
 * Once the data is written to a partition, **it can't be changed** (_immutability_)
 * Data is assigned randomly to a partition unless a key is **provided** 
+
+#### Brokers
+* A Kafka cluster is composed of multiple brokers (servers)
+* Each broker is identified with its ID (Integer)
+* Each broker contains certain topic partitions
+* After connecting to any broker (called a bootstrap broker), you will be connected to the _entire cluster_
+* A **good** number to get started is 3 brokers, but some big clusters have **over** 100 brokers

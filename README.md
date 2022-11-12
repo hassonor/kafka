@@ -18,3 +18,9 @@ ___
   * E.g. offset 4 in partition 0 doesn't represent the same data as offset 4 in partition 1.
 * Order is guaranteed only withing a partition (not across  partitions)
 
+#### Brokers
+* A Kafka cluster is composed of multiple brokers (servers)
+* Each broker is identified with its ID (Integer)
+* Each broker contains certain topic partitions
+* After connecting to any broker (called a bootstrap broker), you will be connected to the _entire cluster_
+* A **good** number to get started is 3 brokers, but some big clusters have **over** 100 brokers
